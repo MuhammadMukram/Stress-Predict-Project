@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block content %}
+<div class="container pt-4">
+    <div class="pred-header d-flex justify-content-center">
+        <p class="h3">
+            Stress Prediction
+        </p>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-center gap-4 mt-5">
+        <button type="button" id="dectree_but" class="btn btn-primary" onclick="showDecTree()">Using Decision Tree</button>
+        <button type="button" id="svm_but" class="btn btn-primary" onclick="showSvm()">Using SVM</button>
+    </div>
+
+    <form action="/dectreeprediction" method="post" class="pt-4 mt-4" id="dectree_form">
+        <div class="d-flex justify-content-center my-3">
+            <p class="h3">Decision Tree Model</p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Snoring Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="snoringrate-input"
+                                    id="exampleFormControlInput1" placeholder="Snoring Rate" min="0" step=any required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Respiration Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="respirationrate-input"
+                                    id="exampleFormControlInput1" placeholder="Respiration Rate" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Body Temperature (°F)</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="bodytemp-input"
+                                    id="exampleFormControlInput1" placeholder="Body Temperature" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Limb Movement</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="limbmovement-input"
+                                    id="exampleFormControlInput1" placeholder="Limb Movement" step=any min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Blood Oxygen</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="bloodoxygen-input"
+                                    id="exampleFormControlInput1" placeholder="Blood Oxygen" step=any min="0" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Rapid Eye Movement (REM)
+                            </label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="rem-input" id="exampleFormControlInput1"
+                                    placeholder="Rapid Eye Movement" step=any min="0" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Sleeping Hours</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="sleepinghours-input"
+                                    id="exampleFormControlInput1" placeholder="Sleeping Hours" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Heart Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="heartrate-input"
+                                    id="exampleFormControlInput1" placeholder="Heart Rate" step=any min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </div>
+        </div>
+    </form>
+
+    <form action="/svmprediction" method="post" class="pt-4 mt-4" id="svm_form">
+        <div class="d-flex justify-content-center my-3">
+            <p class="h3">SVM Model</p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Snoring Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="snoringrate-input"
+                                    id="exampleFormControlInput1" placeholder="Snoring Rate" min="0" step=any required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Respiration Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="respirationrate-input"
+                                    id="exampleFormControlInput1" placeholder="Respiration Rate" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Body Temperature (°F)</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="bodytemp-input"
+                                    id="exampleFormControlInput1" placeholder="Body Temperature" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Limb Movement</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="limbmovement-input"
+                                    id="exampleFormControlInput1" placeholder="Limb Movement" step=any min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col d-flex justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Blood Oxygen</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="bloodoxygen-input"
+                                    id="exampleFormControlInput1" placeholder="Blood Oxygen" step=any min="0" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Rapid Eye Movement (REM)
+                            </label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="rem-input" id="exampleFormControlInput1"
+                                    placeholder="Rapid Eye Movement" step=any min="0" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Sleeping Hours</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="sleepinghours-input"
+                                    id="exampleFormControlInput1" placeholder="Sleeping Hours" step=any min="0"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Heart Rate</label>
+                            <div class="col">
+                                <input type="number" class="form-control" name="heartrate-input"
+                                    id="exampleFormControlInput1" placeholder="Heart Rate" step=any min="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </div>
+        </div>
+    </form>
+
+    {% if (final_dtree_prediction) %}
+    <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class="pred-header">
+                    <p class="h3">
+                        Decision Tree Prediction
+                    </p>
+                    <hr>
+                    <p class="h6">
+                        {% if (final_dtree_prediction[1] == 0) %}
+                            You are not stressed
+                        {% elif (final_dtree_prediction[1] == 1) %}
+                            You are stressed
+                        {% elif (final_dtree_prediction[1] == 2) %}
+                            You are very stressed
+                        {% endif %}
+                    </p>
+                </div>
+                <div class='row mt-4'>
+                    <button id='no-button' onclick="hideAlert()" name='update' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if (final_svm_prediction) %}
+    <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class="pred-header">
+                    <p class="h3">
+                        SVM Prediction
+                    </p>
+                    <hr>
+                    <p class="h6">
+                        {% if (final_svm_prediction[1] == 0) %}
+                            You are not stressed
+                        {% elif (final_svm_prediction[1] == 1) %}
+                            You are stressed
+                        {% elif (final_svm_prediction[1] == 2) %}
+                            You are very stressed
+                        {% endif %}
+                    </p>
+                </div>
+                <div class='row mt-4'>
+                    <button id='no-button' onclick="hideAlert()" name='update' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- <script>
+        showAlert();
+    </script> -->
+
+
+    <!-- Modal -->
+    <!-- <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class='row p-1'>
+                    <div class='col'>
+                        <div class='d-flex justify-content-center'>
+                            <p class='h3' id='modalheadertxt'></p>
+                            Apakah Anda yakin ingin menghapus data ini?
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <form action='/delete' method='post' id="modal_form" name="modalform">
+                    <input type='hidden' name='id_delete' class='form-control input-field' id='id-delete' required>
+                    <div class="container d-flex justify-content-center">
+                        <div class='row mt-4'>
+                            <button id='no-button' onclick="hideAlert()" name='update' type='button'>No</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- {% if final_prediction == 0 %}
+    <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class="pred-header">
+                    <p class="h3">
+                        Prediction
+                    </p>
+                    <hr>
+                    <p class="h6">
+                        You are not stressed
+                    </p>
+                </div>
+                <div class='row mt-4'>
+                    <button id='no-button' onclick="hideAlert()" name='update' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif final_prediction == 1 %}
+    <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class="pred-header">
+                    <p class="h3">
+                        Prediction
+                    </p>
+                    <hr>
+                    <p class="h6">
+                        You are stressed
+                    </p>
+                </div>
+                <div class='row mt-4'>
+                    <button id='no-button' onclick="hideAlert()" name='update' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif final_prediction == 2 %}
+    <div class="inputandel">
+        <div class='modaldel-container'>
+            <div class='container p-4 modaldel'>
+                <div class="pred-header">
+                    <p class="h3">
+                        Prediction
+                    </p>
+                    <hr>
+                    <p class="h6">
+                        You are very stressed
+                    </p>
+                </div>
+                <div class='row mt-4'>
+                    <button id='no-button' onclick="hideAlert()" name='update' type='button'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %} -->
+</div>
+{% endblock %}
