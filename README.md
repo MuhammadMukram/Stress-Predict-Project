@@ -30,18 +30,18 @@ with security features as well as consideration of sleeping habits for stress
 reduction, with an accuracy of up to 96%.
 
 In SayoPillow.csv, you will see the relationship between the parameters- 
-1. snoring range of the user 
-2. respiration rate
-3. body temperature
-4. limb movement rate
-5. blood oxygen levels
-6. eye movement
-7. number of hours of sleep
-8. heart rate
+1. snoring range of the user (sr)
+2. respiration rate (rr)
+3. body temperature (t)
+4. limb movement rate (lm)
+5. blood oxygen levels (bo)
+6. eye movement (rem)
+7. number of hours of sleep (sr.1)/(sh)
+8. heart rate (hr)
 
     `predict value:`
 
-9. Stress Levels:
+9. Stress Levels (sl):
 
     0-low/normal, 
     
@@ -89,7 +89,7 @@ dataset.head()
 
 **output:**
 
-~~~python
+~~~
         sr	rr	t	lm	bo	rem	sr.1	hr	sl
 0	93.80	25.680	91.840	16.600	89.840	99.60	1.840	74.20	3
 1	91.64	25.104	91.552	15.880	89.552	98.88	1.552	72.76	3
@@ -106,7 +106,7 @@ dataset.head()
 
 **output:**
 
-~~~python
+~~~
         sr	rr	t	lm	bo	rem	sh	hr	sl
 0	93.80	25.680	91.840	16.600	89.840	99.60	1.840	74.20	3
 1	91.64	25.104	91.552	15.880	89.552	98.88	1.552	72.76	3
@@ -116,7 +116,7 @@ dataset.head()
 ~~~
 
 > Pengubahan nama kolom ini agar lebih mudah membedakannya dengan kolom `sr` 
-(Sleeping Rate). 
+(Snoring Rate). 
 
 5. Melihat informasi dari dataset.  
 
@@ -126,7 +126,7 @@ dataset.info()
 
 **output:**
 
-~~~python
+~~~
 
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 630 entries, 0 to 629
@@ -159,15 +159,14 @@ dataset['sl'].unique()
 
 **output:**
 
-~~~ python
+~~~
 array([3, 1, 0, 2, 4])
 ~~~
 
 >   Berdasarkan output, terdapat 5 nilai yang menjadi hasil prediksi tersebut.
 Selanjutnya, ke-5 nilai tersebut akan dikonversi menjadi 3 nilai.
 
-2. Mengubah 5 nilai menjadi yang ada di kolom `sl` menjadi 3 nilai dan menghitung
-setiap jumlah setiap nilainya.
+2. Mengubah 5 nilai menjadi yang ada di kolom `sl` menjadi 3 nilai dan menghitung jumlah setiap nilainya.
 
 ~~~ python
 qualityType = { 0 : 0, 1 : 0, 2 : 1, 3 : 2, 4 : 2 }
@@ -177,7 +176,7 @@ dataset.sl.value_counts()
 
 **output:**
 
-~~~ python
+~~~
 2    252
 0    252
 1    126
@@ -190,8 +189,8 @@ Name: sl, dtype: int64
 > - [2] -> 1 = Stress
 > - [3, 4] -> 2 = Sangat Stress
 
-> Perubahan ini saya lakukan karena dengan pertimbangan data yang hanya 630 sehingga
-pengkonversian nilai menjadi 3 nilai ini agar akurasinya dapat lebih akurat.
+> Perubahan ini dilakukan dengan pertimbangan jumlah data yang hanya 630 sehingga
+pengkonversian nilai menjadi 3 nilai ini dilakukan agar akurasinya dapat lebih akurat.
 
 3. Selanjutnya, akan dilakukan pengecekan dataset untuk mengetahui data yang outliers.
 
@@ -214,11 +213,11 @@ X = dataset.drop('sl',axis=1).values
 y = dataset['sl'].values
 ~~~
 
-> Variabel y yang merupakan kolom `sl` pada dataset yang digunakan sebagai hasil
-prediksi nantinya sebagai hasil yang akan menunjukkan tingkat stress manusia.
+> Variabel y yang merupakan kolom `sl` pada dataset digunakan sebagai hasil
+prediksi yang akan menunjukkan tingkat stress seseorang.
 
 **output menampilkan `X`:**
-~~~ python
+~~~
 array([[ 93.8  ,  25.68 ,  91.84 , ...,  99.6  ,   1.84 ,  74.2  ],
        [ 91.64 ,  25.104,  91.552, ...,  98.88 ,   1.552,  72.76 ],
        [ 60.   ,  20.   ,  96.   , ...,  85.   ,   7.   ,  60.   ],
@@ -229,7 +228,7 @@ array([[ 93.8  ,  25.68 ,  91.84 , ...,  99.6  ,   1.84 ,  74.2  ],
 ~~~
 
 **output menampilkan `y`:**
-~~~ python
+~~~
 array([2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 0, 0, 2, 2, 1, 1, 1,
        1, 2, 2, 0, 1, 0, 2, 1, 0, 2, 0, 2, 1, 2, 0, 2, 0, 2, 1, 1, 1, 0,
        1, 2, 1, 2, 0, 2, 0, 0, 2, 0, 0, 1, 2, 2, 2, 0, 2, 2, 0, 1, 2, 0,
@@ -300,7 +299,7 @@ print("DecisionTrees's Accuracy: ", metrics.accuracy_score(y_testset, predTree)*
 
 **output:**
 
-~~~ python
+~~~
 DecisionTrees's Accuracy:  99.36708860759494 %
 ~~~
 
@@ -325,7 +324,7 @@ print("SVM's Accuracy: ", round(metrics.accuracy_score(y_testset, y_predict_scm)
 
 **output:**
 
-~~~ python
+~~~
 SVM's Accuracy:  100.0 %
 ~~~
 
