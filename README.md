@@ -1,7 +1,9 @@
 # Stress-Predict-Project
 
+[Buka Web App](http://m3.pythonanywhere.com/)
+
 Aplikasi `Stress Predict Project` merupakan web app sederhana yang dapat 
-memprediksi tingkat stress seseorang melalui kelakuannya selama tertidur.
+memprediksi tingkat stress seseorang melalui kelakuannya selama tidur.
 
 Web app dibangun berdasarkan algoritma *Decision Tree* dan *Support Vector Machines*
 menggunakan dataset dari Smart Yoga Pillow (SaYoPillow) dari [kaggle](https://www.kaggle.com/datasets/laavanya/human-stress-detection-in-and-through-sleep).
@@ -200,11 +202,10 @@ fig.show()
 
 **output:**
 
-![chart](E:\GitHub\Stress-Predict-Project\static\img\plotboxchart.png "Chart")
-![chart](https://github.com/MuhammadMukram/Stress-Predict-Project/tree/main/static/img/plotboxchart.png "Chart")
+![chart](https://github.com/MuhammadMukram/Stress-Predict-Project/blob/main/static/img/plotboxchart.png?raw=true)
 
-> Dari Box-Plot (Diagram Kotak Garis) di atas tidak diperoleh adanya data outliers 
-yang dapat mempengaruhi hasil prediksi. Dengan demikian, data sudah siap diolah.
+> Dari Box-Plot (Diagram Kotak Garis) di atas tidak diperoleh adanya data outliers. 
+Dengan demikian, data sudah siap diolah.
 
 4. Menentukan kolom yang akan menjadi hasil prediksi.
 
@@ -332,3 +333,34 @@ SVM's Accuracy:  100.0 %
 model tersebut menunjukkan angka sempurna dalam melakukan prediksi. Hal ini berarti
 bahwa model dengan algoritma SVM sangat cocok digunakan dalam kasus ini karena 
 sangat akurat dalam melakukan prediksi.
+
+## Penerapan
+
+[Buka Web App](http://m3.pythonanywhere.com/)
+
+### Prediksi menggunakan Decision Tree
+1. Masuk ke Menu `Prediction` pada Navbar lalu tekan Tombol `Using Decision Tree`
+
+![Tampilan Decision Tree](https://github.com/MuhammadMukram/Stress-Predict-Project/blob/main/static/img/predictiondectree.PNG?raw=true)
+
+2. Setelah memasukkan data pada form, tekan tombol `Predict` untuk melakukan 
+prediksi.
+
+![Tampilan Decision Tree](https://github.com/MuhammadMukram/Stress-Predict-Project/blob/main/static/img/predictiondectreevalue.PNG?raw=true)
+
+### Prediksi menggunakan SVM
+1. Masuk ke Menu `Prediction` pada Navbar lalu tekan Tombol `Using SVM`
+
+![Tampilan Decision Tree](https://github.com/MuhammadMukram/Stress-Predict-Project/blob/main/static/img/predictionsvm.PNG?raw=true)
+
+2. Setelah memasukkan data pada form, tekan tombol `Predict` untuk melakukan 
+prediksi.
+
+![Tampilan Decision Tree](https://github.com/MuhammadMukram/Stress-Predict-Project/blob/main/static/img/predictionsvmvalue.PNG?raw=true)
+
+# Kesimpulan
+
+Berdasarkan hasil di atas, diperoleh bahwa akurasi dalam penggunaan Decision Tree
+mencapai kurang lebih 99%. Hal ini menunjukkan model tersebut dapat menghasilkan 
+prediksi yang akurat. Adapun dalam penggunaan SVM, akurasinya mencapai 100%, sempurna.
+Hal ini menunjukkan model tersebut dapat menghasilkan prediksi yang sangat akurat.
